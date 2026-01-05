@@ -1,0 +1,32 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+.env
+.venv/
+venv/
+ENV/
+
+# ---- OS ----
+.DS_Store
+
+# ---- Streamlit ----
+.streamlit/
+
+# ---- Data / Uploads ----
+data/uploads/*
+!data/uploads/.gitkeep
+
+# ---- Models / Cache ----
+models/
+*.faiss
+*.index
+
+# ---- Logs ----
+*.log
+
+# ---- IDE ----
+.vscode/
+.idea/
