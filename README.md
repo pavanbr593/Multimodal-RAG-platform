@@ -5,37 +5,21 @@ An advanced **AI Knowledge Intelligence Platform** that allows users to upload *
 
 This system runs **fully locally** — no OpenAI keys, no paid APIs — demonstrating **real-world AI system design** used in modern production environments.
 
----
-
-## 🚀 Why This Project Matters
-
-> **“This candidate understands AI systems — not just ML models.”**
-
-Unlike basic ML demos, this project integrates:
-- NLP + Computer Vision  
-- Vector databases (FAISS)  
-- Multi-modal embeddings (text + image)  
-- Local LLM orchestration (Ollama)  
-- Full-stack engineering (FastAPI + Streamlit)  
-
-This is the **same architectural class** used by enterprise AI search tools and internal knowledge assistants.
-
----
 
 ## ✨ Core Capabilities
 
-- 📄 Upload PDF documents  
-- 🖼️ Upload images / scanned documents  
-- 🧠 Ask natural-language questions  
-- 🔍 Semantic search across text & images  
-- 🤖 Local LLM inference (Phi-3 via Ollama)  
-- ⚡ High-performance vector search using FAISS  
-- 🖥️ Modern AI chat-style UI  
-- 🔐 Fully local, offline & privacy-preserving  
+- Upload PDF documents  
+- Upload images / scanned documents  
+- Ask natural-language questions  
+- Semantic search across text & images  
+- Local LLM inference (Phi-3 via Ollama)  
+- High-performance vector search using FAISS  
+- Modern AI chat-style UI  
+- Fully local, offline & privacy-preserving  
 
 ---
 
-## 🧠 AI Techniques Used
+##  AI Techniques Used
 
 ### 🔹 Retrieval-Augmented Generation (RAG)
 - Retrieves relevant chunks from documents and images
@@ -56,78 +40,8 @@ This is the **same architectural class** used by enterprise AI search tools and 
 
 ---
 
-## 🏗️ System Architecture
 
-
-
-
-┌────────────────────────┐
-│        Frontend        │
-│     (Streamlit UI)     │
-└───────────┬────────────┘
-            │
-            ▼
-┌────────────────────────┐
-│        Backend         │
-│        (FastAPI)       │
-│                        │
-│  ┌─────────────────┐   │
-│  │ Ingestion Layer │   │
-│  │  PDF + Image    │   │
-│  │  OCR + Parsing  │   │
-│  └─────────────────┘   │
-│            │           │
-│            ▼           │
-│  ┌─────────────────┐   │
-│  │ Embedding Layer │   │
-│  │ Text + Image    │   │
-│  └─────────────────┘   │
-│            │           │
-│            ▼           │
-│  ┌─────────────────┐   │
-│  │ Vector Store    │   │
-│  │ FAISS Index     │   │
-│  └─────────────────┘   │
-│            │           │
-│            ▼           │
-│  ┌─────────────────┐   │
-│  │ Reasoning Engine│   │
-│  │ Prompt + RAG    │   │
-│  └─────────────────┘   │
-└───────────┬────────────┘
-            │
-            ▼
-┌────────────────────────┐
-│     Local LLM (LLM)    │
-│   Ollama + Phi-3       │
-└────────────────────────┘
-
----
-
-## 🛠️ Tech Stack
-
-### Backend
-- FastAPI
-- FAISS
-- SentenceTransformers
-- CLIP
-- PyPDF2
-- Tesseract OCR
-- Ollama (Phi-3)
-
-### Frontend
-- Streamlit
-- Custom AI chat-style UI
-
-### AI / ML
-- Vector similarity search
-- Multi-modal embeddings
-- Prompt engineering
-- Context-aware reasoning
-
----
-
-## 🧪 Example Queries
+## Example Queries
 
 - "Explain inter-basin water transfer"
 - "Summarize disease symptoms shown in the image"
@@ -136,7 +50,7 @@ This is the **same architectural class** used by enterprise AI search tools and 
 
 ---
 
-## 🔐 Privacy & Offline-First Design
+## Privacy & Offline-First Design
 
 - No cloud APIs
 - No data leakage
@@ -154,3 +68,4 @@ This is the **same architectural class** used by enterprise AI search tools and 
 
 ### AI Answer
 ![AI Answer](screenshots/answer.png)
+
