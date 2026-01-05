@@ -1,4 +1,4 @@
-# 🧠 AI Knowledge Intelligence Platform  
+#  AI Knowledge Intelligence Platform  
 ### Multi-Modal Retrieval-Augmented Generation (RAG) with Local LLMs
 
 An advanced **AI Knowledge Intelligence Platform** that allows users to upload **documents (PDFs)** and **images** and ask **natural-language questions**, receiving **grounded, context-aware answers** using **multi-modal RAG**, **vector search**, and a **local Large Language Model**.
@@ -6,7 +6,7 @@ An advanced **AI Knowledge Intelligence Platform** that allows users to upload *
 This system runs **fully locally** — no OpenAI keys, no paid APIs — demonstrating **real-world AI system design** used in modern production environments.
 
 
-## ✨ Core Capabilities
+## Core Capabilities
 
 - Upload PDF documents  
 - Upload images / scanned documents  
@@ -64,7 +64,7 @@ This system runs **fully locally** — no OpenAI keys, no paid APIs — demonstr
 ![Upload Knowledge](screenshots/upload.png)
 
 ### Ask a Question
-![Ask Question](screenshots/question.png)
+![Ask Question](screenshots/Question.png)
 
 ### AI Answer
 ![AI Answer](screenshots/answer.png)
