@@ -6,7 +6,7 @@ API_URL = "http://127.0.0.1:8000"
 # ---------------- Page Config ----------------
 st.set_page_config(
     page_title="AI Knowledge Intelligence Platform",
-    page_icon="🤖",
+    page_icon="",
     layout="wide",
 )
 
@@ -46,7 +46,7 @@ st.markdown(
 
 # ===================== SIDEBAR =====================
 with st.sidebar:
-    st.markdown("## 📄 Upload Knowledge")
+    st.markdown("##  Upload Knowledge")
 
     uploaded_files = st.file_uploader(
         "Upload PDFs or Images",
@@ -64,17 +64,24 @@ with st.sidebar:
             for file in uploaded_files:
                 files = {"file": (file.name, file.getvalue())}
                 try:
-                    requests.post(f"{API_URL}/upload", files=files)
-                    st.session_state.uploaded_names.append(file.name)
-                except:
-                    st.error(f"Failed to upload {file.name}")
+                    resp = requests.post(f"{API_URL}/upload", files=files, timeout=60)
+                    if resp.status_code == 200:
+                        st.session_state.uploaded_names.append(file.name)
+                    else:
+                        st.error(f"Failed to upload {file.name}: {resp.text}")
+                except Exception as e:
+                    st.error(f"Failed to upload {file.name}: {e}")
 
-            st.success("Knowledge indexed successfully.")
+            if st.session_state.uploaded_names:
+                st.success("Knowledge indexed successfully.")
 
     if st.session_state.uploaded_names:
-        st.markdown("###  Indexed Files")
+        st.markdown("### Indexed Files")
         for name in st.session_state.uploaded_names:
-            st.markdown(f"<span class='file-tag'>{name}</span>", unsafe_allow_html=True)
+            st.markdown(
+                f"<span class='file-tag'>{name}</span>",
+                unsafe_allow_html=True,
+            )
 
     st.markdown("---")
     st.caption("Multi-Modal RAG • Local LLM • FAISS")
@@ -89,12 +96,13 @@ st.markdown("---")
 st.subheader(" Ask a Question")
 
 question = st.text_input(
-    "",
+    "Question",
     placeholder="Ask something from your uploaded documents...",
+    label_visibility="collapsed",
 )
 
 # ---------------- Ask Button ----------------
-if st.button("  Ask AI", use_container_width=True):
+if st.button("Ask AI", use_container_width=True):
     if not question.strip():
         st.warning("Please enter a question.")
     else:
@@ -106,42 +114,47 @@ if st.button("  Ask AI", use_container_width=True):
                     timeout=120,
                 )
 
+            # Handle non-200 responses
             if response.status_code != 200:
-                raise RuntimeError("Backend error")
+                st.error(f"Backend error ({response.status_code}): {response.text}")
+                st.stop()
 
-            result = response.json()
+            # Parse JSON safely
+            try:
+                result = response.json()
+            except Exception:
+                st.error("Backend returned an invalid JSON response:")
+                st.text(response.text)
+                st.stop()
 
-            # ----------- Q&A Layout -----------
-            st.markdown("###  Question")
-            st.markdown(
-                f"<div class='question-box'>{question}</div>",
-                unsafe_allow_html=True,
-            )
+            answer = result.get("answer")
+            if not answer:
+                st.warning("The AI did not return an answer. Check backend logs.")
+            else:
+                # ----------- Q&A Layout -----------
+                st.markdown("###  Question")
+                st.markdown(
+                    f"<div class='question-box'>{question}</div>",
+                    unsafe_allow_html=True,
+                )
 
-            st.markdown("###  Answer")
-            st.markdown(
-                f"""
-                <div class='answer-box'>
-                {result.get("answer", "I couldn’t find enough information to answer this clearly.")}
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
+                st.markdown("###  Answer")
+                st.markdown(
+                    f"<div class='answer-box'>{answer}</div>",
+                    unsafe_allow_html=True,
+                )
 
         except requests.exceptions.ConnectionError:
             st.warning(
-                "🤖 AI engine is starting or temporarily unavailable. "
+                " AI engine is starting or unavailable. "
                 "Please wait a few seconds and try again."
             )
 
         except requests.exceptions.Timeout:
             st.warning(
-                "🤖 This request is taking longer than expected. "
+                " This request took too long. "
                 "Try simplifying your question."
             )
 
-        except Exception:
-            st.warning(
-                "🤖 I couldn’t generate an answer this time. "
-                "Try rephrasing the question or uploading more documents."
-            )
+        except Exception as e:
+            st.warning(f" I couldn’t generate an answer this time. Exception: {e}")
