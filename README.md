@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🧠 ContextIQ
+#  ContextIQ
 
 ### Multi-Modal Retrieval-Augmented Generation (RAG) with Local LLMs
 
@@ -105,6 +105,4 @@ The entire system runs **100% locally** — no OpenAI keys, no paid APIs, no dat
 
 **Built for private, grounded, multi-modal AI reasoning — entirely on your own machine.**
 
-Made with 🧠 + 🔒 by [Pavan Bendre R](https://github.com/pavanbr593)
 
-</div>
